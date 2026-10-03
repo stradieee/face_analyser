@@ -1,0 +1,1 @@
+This project source is provided for educational and development use. The face-api.js library and pretrained model assets referenced by the application are subject to their respective licenses and terms. Review upstream licenses before redistribution.

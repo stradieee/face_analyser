@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser-based real-time facial analysis using face-api.js.">
+  <title>FaceScope — Real-Time Facial Analysis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">◉</span><span>FaceScope</span></div>
+    <div class="status"><span id="modelDot" class="dot"></span><span id="modelStatus">Ready to load</span></div>
+  </header>
+
+  <main class="app-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">LOCAL • BROWSER • REAL TIME</p>
+        <h1>Facial Analysis Studio</h1>
+        <p class="subtitle">Detect faces and estimate age, gender, expressions, face shape and optional visual feature hints directly in your browser.</p>
+      </div>
+      <div class="actions">
+        <button id="startBtn" class="primary">Start Camera</button>
+        <button id="stopBtn" class="secondary" disabled>Stop</button>
+        <button id="retryBtn" class="secondary">Reload Models</button>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="video-card">
+        <div class="video-wrap" id="videoWrap">
+          <video id="video" autoplay muted playsinline></video>
+          <canvas id="overlay"></canvas>
+          <div id="cameraOverlay" class="camera-overlay">
+            <div class="camera-icon">⌁</div>
+            <strong>Camera is off</strong>
+            <span>Click “Start Camera” and allow webcam access.</span>
+          </div>
+        </div>
+        <div class="video-footer">
+          <div><span class="live-dot"></span><span id="streamStatus">Idle</span></div>
+          <div id="fps">0 FPS</div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">LIVE RESULTS</p>
+            <h2>Detected Faces</h2>
+          </div>
+          <span id="faceCount" class="count">0</span>
+        </div>
+        <div id="results" class="results empty">
+          <div class="empty-state">
+            <div class="empty-icon">⌕</div>
+            <strong>No face detected</strong>
+            <span>Keep your face visible and well lit.</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="info-grid">
+      <article class="info-card">
+        <span class="info-number">01</span>
+        <h3>On-device processing</h3>
+        <p>Webcam frames are analyzed in the browser. The application does not upload camera frames to a server.</p>
+      </article>
+      <article class="info-card">
+        <span class="info-number">02</span>
+        <h3>Pretrained models</h3>
+        <p>Face detection, landmarks, expressions, age and gender use the face-api.js pretrained model family.</p>
+      </article>
+      <article class="info-card warning-card">
+        <span class="info-number">03</span>
+        <h3>Estimates, not facts</h3>
+        <p>Age, gender, emotion and visual feature hints can be inaccurate. Gender is a model classification, not a determination of gender identity.</p>
+      </article>
+    </section>
+
+    <details class="technical">
+      <summary>Technical status & troubleshooting</summary>
+      <div id="log" class="log">Waiting for initialization…</div>
+      <ul>
+        <li>Use <strong>http://localhost</strong> rather than opening the HTML with <code>file://</code> if webcam access is blocked.</li>
+        <li>Models are loaded from public face-api.js model mirrors when you start the camera. An alternate GitHub model source is tried automatically if the first source fails.</li>
+        <li>If the camera is unavailable, check browser permission, another application using the webcam, and HTTPS/localhost requirements.</li>
+      </ul>
+    </details>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
